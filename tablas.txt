@@ -1,0 +1,72 @@
+CREATE DATABASE academico;
+
+
+
+CREATE TABLE academico.universidad
+(
+id int primary key not null AUTO_INCREMENT,
+nombre varchar(50) not null
+);
+
+
+
+CREATE TABLE academico.profesor
+(
+id int primary key not null AUTO_INCREMENT,
+nombre varchar(50) not null,
+usuario varchar(50) not null,
+clave varchar(50) not null,
+email varchar(50) not null
+);
+
+
+CREATE TABLE academico.administrador
+(
+id int primary key not null AUTO_INCREMENT,
+nombre varchar(50) not null,
+usuario varchar(50) not null,
+clave varchar(50) not null
+);
+
+
+
+CREATE TABLE academico.curso 
+(
+id int primary key not null AUTO_INCREMENT,
+id_Profesor int not null,
+id_Universidad int not null,
+asignatura varchar(50) not null,
+grupo varchar(50) not null,
+horario varchar(50) not null,
+FOREIGN KEY(id_Profesor) REFERENCES profesor(id),
+FOREIGN KEY(id_Universidad) REFERENCES universidad(id)
+);
+
+
+
+CREATE TABLE academico.estudiante
+(
+id int primary key not null AUTO_INCREMENT,
+id_Universidad int not null,
+codigo int(50) not null,
+nombre varchar(50) not null,
+usuario varchar(50) not null,
+clave varchar(50) not null,
+email varchar(50) not null,
+FOREIGN KEY(id_Universidad) REFERENCES universidad(id)
+);
+
+
+CREATE TABLE academico.nota
+(
+id_Estudiante int not null,
+id_Curso int not null,
+corte1 double not null,
+corte2 double not null,
+corte3 double not null,
+FOREIGN KEY (id_Estudiante) REFERENCES estudiante (id),
+FOREIGN KEY (id_Curso) REFERENCES curso (id)
+);
+
+
+
